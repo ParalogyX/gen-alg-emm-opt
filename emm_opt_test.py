@@ -17,11 +17,11 @@ from pymoo.visualization.scatter import Scatter
 class MyProblem(Problem):
 
     def __init__(self):
-        super().__init__(n_var=2,
+        super().__init__(n_var=3,
                          n_obj=3,
                          n_constr=1,
-                         xl=np.array([6, 600]),
-                         xu=np.array([8.7, 1200]),
+                         xl=np.array([6, 600, 100]),
+                         xu=np.array([8.7, 1200, 1800]),
                          elementwise_evaluation=True)
 
     def _evaluate(self, x, out, *args, **kwargs):
@@ -30,7 +30,7 @@ class MyProblem(Problem):
         
         f1 = func_res[0]
         f2 = func_res[1]
-        f3 = 1500 / (func_res[2] * 50 * 1000) * 100
+        f3 = x[2] / (func_res[2] * 50 * 1000) * 100
         f3 = -f3
         #f1 = x[0] - x[1]
         #f1 = -f1
@@ -53,7 +53,7 @@ class MyProblem(Problem):
 
 problem = MyProblem()
 
-algorithm = NSGA2(pop_size=100)
+algorithm = NSGA2(pop_size=50)
 
 res = minimize(problem,
                algorithm,
