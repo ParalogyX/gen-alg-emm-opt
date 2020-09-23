@@ -53,7 +53,7 @@ class MyProblem(Problem):
 
 problem = MyProblem()
 
-algorithm = NSGA2(pop_size=50)
+algorithm = NSGA2(pop_size=100)
 
 res = minimize(problem,
                algorithm,
